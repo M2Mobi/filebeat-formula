@@ -53,6 +53,11 @@ output:
 {%- if elasticsearch.get('enabled', False) %}
   elasticsearch:
     hosts: ["http://{{ elasticsearch.server }}"]
+{%- if 'pipeline' in elasticsearch %}
+{%- for id in elasticsearch.pipeline %}
+    pipeline: '{{ id }}'
+{%- endfor %}
+{%- endif %}
 {%- endif %}
 
 {%- if logstash.get('enabled', False) %}
